@@ -1,0 +1,22 @@
+if [["${UID}" -ne 0]]
+then 
+echo 'User should be a root user'
+fi
+read -p 'Enter Username to create:' uname
+useradd -m ${uname}
+if [['${?} -eq 0]]
+then
+echo 'Username is accepted'
+else
+echo 'Invalid Username'
+exit(1)
+fi
+read -p 'Enter password for the username:' pword
+passwd --stdin ${uname}
+if [['${?} -eq 0]]
+then 
+echo 'User created'
+else
+echo 'Enter valid password'
+exit(1)
+fi
